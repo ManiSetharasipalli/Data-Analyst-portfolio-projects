@@ -19,7 +19,7 @@ SET author=SUBSTRING_INDEX(author,':',-1);
 UPDATE audible_books 
 SET author=SUBSTRING_INDEX(author,',',1);
 
--- this process will aplly to narrator column also
+-- this process will apply to narrator column also
 
 UPDATE audible_books 
 SET narrator=SUBSTRING_INDEX(narrator,':',-1);
@@ -27,7 +27,7 @@ SET narrator=SUBSTRING_INDEX(narrator,':',-1);
 UPDATE audible_books 
 SET narrator=SUBSTRING_INDEX(author,',',1);
 
--- Name column is look good  we just remove '#' and ':' 
+-- Name column is not looks good so we remove '#' and ':' 
 
 UPDATE audible_books 
 SET name=SUBSTRING_INDEX(name,'#',1);
@@ -36,8 +36,6 @@ UPDATE audible_books
 SET name=SUBSTRING_INDEX(name,':',1); 
 
 -- we want to change the time column in minutes
-
--- By splitting the string and calculating the total duration in minutes
 
 -- we add new column for this manipulation
 
@@ -67,7 +65,7 @@ ALTER TABLE audible_books
 DROP COLUMN hours,
 DROP COLUMN minutes;
 
--- we rename the column as runtime_in_mins instead using time
+-- we rename the column as runtime_in_mins instead of using time
 
 ALTER TABLE audible_books
 RENAME COLUMN time TO runtime_in_mins;
@@ -75,15 +73,18 @@ RENAME COLUMN time TO runtime_in_mins;
 -- now we change releasedate column into  in this format 'yyyy-mm-dd'
 UPDATE audible_books SET releasedate=DATE_FORMAT(releasedate,'20%d-%m-%y');
 
--- now we take in the stars column only stars
+-- now we take in only stars from the stars column
 
 UPDATE audible_books 
 SET stars=SUBSTRING_INDEX(stars,' out',1);
 
--- Now we remove not rated rows or replace with null
+-- Now we remove not rated rows or replace it with null
+
 UPDATE audible_books 
 SET stars=NULLIF(stars,'Not rated yet');
--- now we remove comma in the price column
+
+-- now we remove commas in the price column
+
 UPDATE audible_books 
 SET Price=REPLACE(price,',','');
 
@@ -100,7 +101,8 @@ MODIFY releasedate DATE,
 MODIFY language VARCHAR(30),
 MODIFY stars FLOAT,
 MODIFY price BIGINT;
--- we can also change column name
+
+-- we can change column names also
 
 ALTER TABLE audible_books
 RENAME COLUMN name TO Book_name,
