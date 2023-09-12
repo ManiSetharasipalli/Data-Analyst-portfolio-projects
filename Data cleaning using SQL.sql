@@ -37,7 +37,7 @@ SET name=SUBSTRING_INDEX(name,':',1);
 
 -- we want to change the time column in minutes
 
--- we add new column for this manipulation
+-- we add new columns for this manipulation
 
 ALTER  TABLE audible_uncleaned
 ADD COLUMN (hours int,minutes int);
