@@ -25,7 +25,7 @@ This project focuses on cleaning and enhancing the Audible Books dataset using M
 
     1.Cleaned the 'stars' column, removing 'Not rated yet' entries to enhance data accuracy.
 
-5.**Price Column Optimization:**]
+5.**Price Column Optimization:**
 
     1.Removed commas in the 'price' column for improved numerical handling.
 
